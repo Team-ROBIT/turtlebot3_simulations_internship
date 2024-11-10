@@ -36,6 +36,9 @@ public:
   std::vector<float> laser_data;
   std::vector<float> cmd_vel_data;
 
+  bool direction;
+  std::string direction_str;
+
 protected:
   void run();
 
@@ -44,6 +47,7 @@ private:
 
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_laser;
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_cmd_vel;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_direction;
 
   void laserCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
   void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg);

@@ -2,9 +2,10 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
 
 def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
@@ -49,6 +50,13 @@ def generate_launch_description():
             'y_pose': y_pose
         }.items()
     )
+
+    status_manager_cmd = Node(
+        package='turtlebot3_status_manager',
+        executable='turtlebot3_status_manager',
+        name='turtlebot3_status_manager',
+        output='screen'
+    )
     
     ld = LaunchDescription()
 
@@ -57,5 +65,6 @@ def generate_launch_description():
     ld.add_action(gzclient_cmd)
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(spawn_turtlebot_cmd)
+    ld.add_action(status_manager_cmd)
 
     return ld

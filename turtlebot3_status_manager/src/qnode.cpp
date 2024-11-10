@@ -23,6 +23,8 @@ QNode::QNode()
     "/scan", 10, std::bind(&QNode::laserCallback, this, std::placeholders::_1));
   subscription_cmd_vel = node->create_subscription<geometry_msgs::msg::Twist>(
     "/cmd_vel", 10, std::bind(&QNode::cmdVelCallback, this, std::placeholders::_1));
+  publisher_direction =
+    node->create_publisher<std_msgs::msg::String>("/turtlebot3_status_manager/direction", 10);
 
   this->start();
 }
@@ -39,6 +41,11 @@ void QNode::run()
   rclcpp::WallRate loop_rate(20);
   while (rclcpp::ok()) {
     rclcpp::spin_some(node);
+    if (direction) {
+      std_msgs::msg::String direction_msg;
+      direction_msg.data = direction_str;
+      publisher_direction->publish(direction_msg);
+    }
     loop_rate.sleep();
   }
   rclcpp::shutdown();

@@ -20,6 +20,21 @@ MainWindow::MainWindow(QWidget * parent) : QMainWindow(parent), ui(new Ui::MainW
 
   qnode = new QNode();
 
+  std::random_device rd;
+  std::mt19937 gen(rd());
+
+  std::uniform_int_distribution<int> dis(0, 99);
+  int random_integer = dis(gen);
+
+  if (random_integer % 2 == 0) {
+    qnode->direction_str = "left";
+    ui->direction->setText("Left");
+  } else {
+    qnode->direction_str = "right";
+    ui->direction->setText("Right");
+  }
+  qnode->direction = true;
+
   QObject::connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
   QObject::connect(qnode, SIGNAL(updateLaserData()), this, SLOT(updateLaserData()));
   QObject::connect(qnode, SIGNAL(updateCmdVelData()), this, SLOT(updateCmdVelData()));
@@ -32,6 +47,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
 
 void MainWindow::on_macro1_clicked()
 {
+  system("ros2 service call /reset_world std_srvs/srv/Empty");
 }
 
 void MainWindow::on_macro2_clicked()

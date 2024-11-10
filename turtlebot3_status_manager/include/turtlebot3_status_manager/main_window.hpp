@@ -18,6 +18,7 @@
 #include "ui_mainwindow.h"
 
 #include <QMainWindow>
+#include <random>
 
 /*****************************************************************************
 ** Interface [MainWindow]
