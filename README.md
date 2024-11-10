@@ -5,13 +5,14 @@
 1. Install the dependencies
 ```bash
 $ sudo apt-get install -y ros-humble-gazebo-*
-$ sudo apt-get install -y ros-humble-turtlebot3-msgs
 ```
 
 2. Clone the repository
 ```bash
 $ cd ~/{Your ROS 2 Workspace}/src
 $ git clone https://github.com/Team-ROBIT/turtlebot3_simulations_internship.git
+$ cd turtlebot3_simulations_internship
+$ git submodule update --init --recursive # Not necessary if you already have the submodules
 ```
 
 3. Build the workspace
