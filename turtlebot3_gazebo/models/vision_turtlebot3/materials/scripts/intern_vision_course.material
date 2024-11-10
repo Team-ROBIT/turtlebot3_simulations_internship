@@ -1,0 +1,14 @@
+material intern_vision_course
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture course.png
+        scale 1 1
+      }
+    }
+  }
+}
