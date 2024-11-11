@@ -54,6 +54,25 @@ void MainWindow::on_macro2_clicked()
 {
 }
 
+void MainWindow::on_reload_clicked()
+{
+  qnode->direction = false;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+
+  std::uniform_int_distribution<int> dis(0, 99);
+  int random_integer = dis(gen);
+
+  if (random_integer % 2 == 0) {
+    qnode->direction_str = "left";
+    ui->direction->setText("Left");
+  } else {
+    qnode->direction_str = "right";
+    ui->direction->setText("Right");
+  }
+  qnode->direction = true;
+}
+
 void MainWindow::updateLaserData()
 {
   ui->scan->setText(QString::number(qnode->laser_data[ui->scan_num->value()]));

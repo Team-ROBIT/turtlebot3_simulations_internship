@@ -38,6 +38,7 @@ public:
 public Q_SLOTS:
   void on_macro1_clicked();
   void on_macro2_clicked();
+  void on_reload_clicked();
 
   void updateLaserData();
   void updateCmdVelData();
