@@ -37,6 +37,6 @@ alias killg='killall -9 gzserver && killall -9 gzclient && killall -9 rosmaster'
 
 ## Vision Turtlebot3 Launch
 ```bash
-$ ros2 launch turtlebot3_simulations_internship internship_vision_turtlebot3.launch.py
+$ ros2 launch turtlebot3_gazebo internship_vision_turtlebot3.launch.py
 ```
 ![vision_turtlebot3](./docs/vision_turtlebot.png)    
