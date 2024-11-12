@@ -25,6 +25,8 @@ QNode::QNode()
     "/cmd_vel", 10, std::bind(&QNode::cmdVelCallback, this, std::placeholders::_1));
   publisher_direction =
     node->create_publisher<std_msgs::msg::String>("/turtlebot3_status_manager/direction", 10);
+  publisher_number =
+    node->create_publisher<std_msgs::msg::Int32>("/turtlebot3_status_manager/number", 10);
 
   this->start();
 }
@@ -45,6 +47,11 @@ void QNode::run()
       std_msgs::msg::String direction_msg;
       direction_msg.data = direction_str;
       publisher_direction->publish(direction_msg);
+    }
+    if (number) {
+      std_msgs::msg::Int32 number_msg;
+      number_msg.data = number_int;
+      publisher_number->publish(number_msg);
     }
     loop_rate.sleep();
   }

@@ -20,6 +20,7 @@
 #endif
 #include <geometry_msgs/msg/twist.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
+#include <std_msgs/msg/int32.hpp>
 #include <std_msgs/msg/string.hpp>
 
 #include <QThread>
@@ -36,8 +37,11 @@ public:
   std::vector<float> laser_data;
   std::vector<float> cmd_vel_data;
 
-  bool direction;
+  bool direction = false;
   std::string direction_str;
+
+  bool number = false;
+  int number_int = 0;
 
 protected:
   void run();
@@ -48,6 +52,7 @@ private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_laser;
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_cmd_vel;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_direction;
+  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_number;
 
   void laserCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
   void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
